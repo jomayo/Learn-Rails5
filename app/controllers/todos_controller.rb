@@ -33,11 +33,19 @@ class TodosController < ApplicationController
     @todo = Todo.find(params[:id])
     if @todo.update(todo_params)
       flash[:notice] = "Todo successfully updated"
-    redirect_to todo_path(@todo)
+      redirect_to todo_path(@todo)
     else
       render 'edit'
     end
   end
+  
+  def destroy
+    @todo = Todo.find(params[:id])
+    @todo.destroy
+    flash[:notice] = "Todo successfully deleted"
+    redirect_to todos_path
+  end
+    
   
   
   private
