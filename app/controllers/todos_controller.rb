@@ -1,4 +1,7 @@
 class TodosController < ApplicationController
+  # sets the todo instance found in private methods
+  # allows refactoring to remove Todo.find(params[:id]) from new, create, show etc
+  before_action :set_todo, only: [:edit, :update, :show, :destroy]
   
   def index
     @todos =Todo.all
@@ -6,9 +9,9 @@ class TodosController < ApplicationController
   
   
   def new
-    # render plain:"You found the index page for Todos"
     @todo = Todo.new
   end
+  
   
   def create
     @todo = Todo.new(todo_params)
@@ -21,16 +24,12 @@ class TodosController < ApplicationController
   end
   
   def edit
-    @todo = Todo.find(params[:id])
   end
   
   def show
-    @todo = Todo.find(params[:id])
   end
   
-  
   def update
-    @todo = Todo.find(params[:id])
     if @todo.update(todo_params)
       flash[:notice] = "Todo successfully updated"
       redirect_to todo_path(@todo)
@@ -40,18 +39,18 @@ class TodosController < ApplicationController
   end
   
   def destroy
-    @todo = Todo.find(params[:id])
     @todo.destroy
     flash[:notice] = "Todo successfully deleted"
     redirect_to todos_path
   end
     
-  
-  
   private
+    def set_todo
+      @todo = Todo.find(params[:id])
+    end
+    
     def todo_params
       params.require(:todo).permit(:name, :description)
-    
     end
   
 end
