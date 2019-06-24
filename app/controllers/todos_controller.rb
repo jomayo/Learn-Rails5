@@ -1,5 +1,9 @@
 class TodosController < ApplicationController
   
+  def index
+    @todos =Todo.all
+  end
+  
   
   def new
     # render plain:"You found the index page for Todos"
@@ -18,7 +22,6 @@ class TodosController < ApplicationController
   
   def edit
     @todo = Todo.find(params[:id])
-  
   end
   
   def show

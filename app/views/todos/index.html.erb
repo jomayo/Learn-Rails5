@@ -1,0 +1,24 @@
+ <h1> This is the index page</h1>
+
+<p>
+  <%= link_to "Create a todo", new_todo_path %>
+</p>
+
+<table>
+  <tr>
+    <th>name</th>
+    <th>description</th>
+  </tr>
+  #iterate through todos and for each one show name & description
+  #link_to creates url link, adds url path, takes todo object
+  #to find & link appropriate id in data base
+  <% @todos.each do |todo| %>
+    <tr>
+      <td><%= todo.name %></td>
+      <td><%= todo.description %></td>
+      <td><%= link_to "Edit", edit_todo_path(todo) %></td>
+      <td><%= link_to "Show", todo_path(todo) %></td>
+    </tr>
+  <% end %>
+</table>
+

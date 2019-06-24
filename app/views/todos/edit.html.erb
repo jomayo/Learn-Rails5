@@ -15,14 +15,13 @@
     <%= f.label :name %> <br>
     <%= f.text_field :name %>
   </p>  
-  
   <p>
     <%= f.label :description %> <br>
     <%= f.text_area :description %>
   </p>
-  
   <p>
     <%= f.submit %>
   </p>
-  
 <% end %>
+
+<%= link_to "Goto todos listing", todos_path %>
